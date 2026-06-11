@@ -74,9 +74,12 @@
     #home {
       min-height: 100vh;
       display: flex; align-items: center;
+      flex-direction: row;
       padding: 100px 6% 60px;
       position: relative; overflow: hidden;
+      gap: 40px;
     }
+    .hero-content { order: 1; }
     .hero-glow {
       position: absolute; top: 10%; left: -10%;
       width: 500px; height: 500px;
@@ -133,34 +136,52 @@
     .btn-outline:hover { background: rgba(0,229,255,0.1); transform: translateY(-2px); }
 
     /* ── HERO IMAGE ── */
-    .hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .hero-visual { 
+      flex: 1; display: flex; justify-content: center; align-items: center;
+      order: 2;
+    }
     .avatar-ring {
       position: relative; width: 320px; height: 320px;
     }
+    /* Outer spinning ring */
     .avatar-ring::before {
       content: '';
-      position: absolute; inset: -12px; border-radius: 50%;
-      background: conic-gradient(var(--cyan), var(--blue), var(--pink), var(--cyan));
-      animation: spin 5s linear infinite;
-      padding: 3px;
+      position: absolute; inset: -14px; border-radius: 50%;
+      background: conic-gradient(transparent 30%, var(--cyan) 50%, var(--blue) 70%, var(--pink) 85%, transparent 100%);
+      animation: spin 4s linear infinite;
+      z-index: 0;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+    /* Mask ring */
     .avatar-ring::after {
       content: '';
       position: absolute; inset: -8px; border-radius: 50%;
       background: var(--bg);
+      z-index: 0;
     }
     .avatar-inner {
       position: absolute; inset: 0; border-radius: 50%; z-index: 1;
-      background: linear-gradient(135deg, var(--bg3), var(--bg2));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 7rem; overflow: hidden;
-      border: 3px solid rgba(0,229,255,0.3);
+      overflow: hidden;
+      border: 3px solid rgba(0,229,255,0.25);
+      background: var(--bg2);
+      /* circle appears first, then photo slides up */
+      animation: circleAppear 0.6s ease-out forwards;
     }
-    .avatar-inner .initials {
-      font-size: 5rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    @keyframes circleAppear {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .avatar-inner img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: photoSlideUp 0.8s ease-out 0.7s forwards;
+    }
+    @keyframes photoSlideUp {
+      0%   { opacity: 0; transform: translateY(40px); }
+      60%  { opacity: 1; transform: translateY(-8px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
     .float-badge {
       position: absolute; z-index: 10;
@@ -355,6 +376,13 @@
 
     /* ── RESPONSIVE ── */
     @media(max-width:900px){
+      #home { min-height: auto !important; padding-top: 90px !important; padding-bottom: 40px !important; flex-direction: column !important; text-align: center; }
+      .hero-content { order: 2 !important; }
+      .hero-visual { order: 1 !important; }
+      .hero-btns { justify-content: center; }
+      .hero-socials { justify-content: center; }
+      section { padding: 60px 5% !important; }
+      .stats-bar { padding: 24px 5% !important; }
       #home { flex-direction: column; text-align: center; gap: 40px; }
       .hero-btns { justify-content: center; }
       .hero-socials { justify-content: center; }
@@ -480,4 +508,300 @@
           <p>Himanshu S. Meshram</p>
         </div>
         <div class="info-item">
-  
+          <label>ROLE</label>
+          <p>Web Developer</p>
+        </div>
+        <div class="info-item">
+          <label>EMAIL</label>
+          <p>himanshu@email.com</p>
+        </div>
+        <div class="info-item">
+          <label>AVAILABLE</label>
+          <p>Freelance / Full-time</p>
+        </div>
+        <div class="info-item">
+          <label>EXPERIENCE</label>
+          <p>2+ Years</p>
+        </div>
+        <div class="info-item">
+          <label>LANGUAGE</label>
+          <p>Hindi, English</p>
+        </div>
+      </div>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:0.83rem;color:var(--muted)">Frontend Development</span>
+            <span style="font-size:0.83rem;color:var(--cyan)">88%</span>
+          </div>
+          <div class="skill-level-bar"><div class="skill-fill" style="width:88%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:0.83rem;color:var(--muted)">Python / Django</span>
+            <span style="font-size:0.83rem;color:var(--cyan)">80%</span>
+          </div>
+          <div class="skill-level-bar"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:0.83rem;color:var(--muted)">JavaScript</span>
+            <span style="font-size:0.83rem;color:var(--cyan)">85%</span>
+          </div>
+          <div class="skill-level-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="display:block;visibility:visible;opacity:1;">
+  <div class="section-header">
+    <p class="section-eyebrow">// tech_stack</p>
+    <h2 class="section-title">My <span>Skills</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">HTML5</div>
+      <div style="font-size:0.8rem;color:var(--muted)">Semantic markup, accessibility best practices, modern web standards.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:92%"></div></div>
+      <div class="skill-pct">92%</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎨</div>
+      <div class="skill-name">CSS3</div>
+      <div style="font-size:0.8rem;color:var(--muted)">Flexbox, Grid, animations, responsive design & modern CSS.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:88%"></div></div>
+      <div class="skill-pct">88%</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">JavaScript</div>
+      <div style="font-size:0.8rem;color:var(--muted)">ES6+, DOM manipulation, async programming, APIs.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:85%"></div></div>
+      <div class="skill-pct">85%</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Python</div>
+      <div style="font-size:0.8rem;color:var(--muted)">Scripting, automation, data processing, web backends.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:82%"></div></div>
+      <div class="skill-pct">82%</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🦄</div>
+      <div class="skill-name">Django</div>
+      <div style="font-size:0.8rem;color:var(--muted)">REST APIs, ORM, auth systems, full-stack web apps.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:78%"></div></div>
+      <div class="skill-pct">78%</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">Databases</div>
+      <div style="font-size:0.8rem;color:var(--muted)">SQL, PostgreSQL, SQLite, database design & queries.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:75%"></div></div>
+      <div class="skill-pct">75%</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <p class="section-eyebrow">// what_i_do</p>
+    <h2 class="section-title">My <span>Services</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">💻</div>
+      <div class="service-title">Web Development</div>
+      <div class="service-desc">Building fast, responsive, and pixel-perfect websites using HTML, CSS, and JavaScript.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚙️</div>
+      <div class="service-title">Backend Development</div>
+      <div class="service-desc">Robust server-side applications and REST APIs using Python and Django framework.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <div class="service-title">Responsive Design</div>
+      <div class="service-desc">Mobile-first layouts that look great and work flawlessly on any screen size.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔌</div>
+      <div class="service-title">API Integration</div>
+      <div class="service-desc">Connecting your app with third-party services, REST APIs, and external data sources.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header">
+    <p class="section-eyebrow">// my_work</p>
+    <h2 class="section-title">Recent <span>Projects</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="portfolio-grid">
+    <div class="project-card">
+      <div class="project-thumb project-thumb-1">🛒</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">Django</span>
+          <span class="tag">Python</span>
+          <span class="tag">HTML/CSS</span>
+        </div>
+        <div class="project-title">E-Commerce Platform</div>
+        <div class="project-desc">Full-stack online store with user authentication, product catalog, cart and Django backend.</div>
+        <div class="project-links">
+          <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+          <a href="#"><i class="fab fa-github"></i> Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb project-thumb-2">📋</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">REST API</span>
+        </div>
+        <div class="project-title">Task Management App</div>
+        <div class="project-desc">Interactive to-do/project tracker with drag-and-drop, filters, and real-time updates.</div>
+        <div class="project-links">
+          <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+          <a href="#"><i class="fab fa-github"></i> Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb project-thumb-3">🌤️</div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">API</span>
+          <span class="tag">JavaScript</span>
+        </div>
+        <div class="project-title">Weather Dashboard</div>
+        <div class="project-desc">Real-time weather app with location search, 5-day forecast, and beautiful data visualizations.</div>
+        <div class="project-links">
+          <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+          <a href="#"><i class="fab fa-github"></i> Source</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <p class="section-eyebrow">// get_in_touch</p>
+    <h2 class="section-title">Contact <span>Me</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Let's Work Together</h3>
+      <p>Have a project in mind or want to collaborate? Feel free to reach out — I'm always open to exciting new opportunities.</p>
+      <div class="contact-item">
+        <div class="contact-ico"><i class="fas fa-envelope"></i></div>
+        <div>
+          <span>Email</span>
+          <strong>himanshu@email.com</strong>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-ico"><i class="fas fa-phone"></i></div>
+        <div>
+          <span>Phone</span>
+          <strong>+91 XXXXX XXXXX</strong>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-ico"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <span>Location</span>
+          <strong>India</strong>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="input-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John"/>
+        </div>
+        <div class="input-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Doe"/>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@example.com"/>
+      </div>
+      <div class="input-group">
+        <label>Subject</label>
+        <input type="text" placeholder="Project Inquiry"/>
+      </div>
+      <div class="input-group">
+        <label>Message</label>
+        <textarea placeholder="Tell me about your project..."></textarea>
+      </div>
+      <button class="btn-send">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 <span>Himanshu Shankar Meshram</span>. Crafted with ❤️ and lots of ☕</p>
+</footer>
+
+<script>
+  // Typed text effect
+  const roles = ["Web Developer", "Python Developer", "Django Expert", "Frontend Dev"];
+  let i = 0, j = 0, del = false;
+  const el = document.getElementById("typed");
+  function type() {
+    if (!del) {
+      el.textContent = roles[i].substring(0, j + 1);
+      j++;
+      if (j === roles[i].length) { del = true; setTimeout(type, 1800); return; }
+    } else {
+      el.textContent = roles[i].substring(0, j - 1);
+      j--;
+      if (j === 0) { del = false; i = (i + 1) % roles.length; }
+    }
+    setTimeout(type, del ? 60 : 100);
+  }
+  type();
+
+  // Active nav on scroll
+  const sections = document.querySelectorAll("section[id]");
+  const links = document.querySelectorAll(".nav-links a");
+  window.addEventListener("scroll", () => {
+    let cur = "";
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+    links.forEach(l => {
+      l.classList.remove("active");
+      if (l.getAttribute("href") === "#" + cur) l.classList.add("active");
+    });
+  });
+
+  // Skill bar animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.querySelectorAll(".skill-fill").forEach(f => f.style.animation = "fillBar 1.5s ease-out forwards");
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll(".skill-card, #about").forEach(c => observer.observe(c));
+</script>
+</body>
+</html>
