@@ -608,11 +608,10 @@
       .contact-wrapper { grid-template-columns: 1fr; }
     }
 
-    /* ── SKILLS SCROLL SECTION (withhoney style) ── */
-    #skills { padding-bottom: 0; }
+    /* ── SKILLS SCROLL SECTION ── */
     .skills-scroll-container {
       position: relative;
-      height: 600vh;
+      height: 500vh; /* tall scroll space */
     }
     .skill-sticky-wrapper {
       position: sticky;
@@ -623,98 +622,59 @@
       justify-content: center;
       overflow: hidden;
     }
-
-    /* Counter top-left like withhoney [ 01 / 05 ] */
-    .skills-counter {
-      position: absolute;
-      top: 28px; left: 28px;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 2px;
-      z-index: 10;
-      pointer-events: none;
-    }
-    /* Section label top-right */
-    .skills-label {
-      position: absolute;
-      top: 28px; right: 28px;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      z-index: 10;
-      pointer-events: none;
-    }
-
     .skill-scroll-card {
       position: absolute;
-      width: min(460px, 88vw);
-      background: rgba(15, 5, 5, 0.88);
-      border: 1px solid rgba(255,59,59,0.18);
-      border-radius: 16px;
-      padding: 32px 28px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 12px 60px rgba(0,0,0,0.7), 0 0 30px rgba(255,59,59,0.06);
+      width: min(480px, 88vw);
+      background: rgba(20, 8, 8, 0.85);
+      border: 1px solid rgba(255,59,59,0.2);
+      border-radius: 20px;
+      padding: 36px 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,59,59,0.08);
+      /* Start: tilted, below screen */
       transform: translateY(120vh) rotate(var(--tilt, -8deg));
       opacity: 0;
       transition: none;
       will-change: transform, opacity;
     }
     .skill-scroll-card[data-index="0"] { --tilt: -10deg; }
-    .skill-scroll-card[data-index="1"] { --tilt:  8deg; }
-    .skill-scroll-card[data-index="2"] { --tilt: -7deg; }
-    .skill-scroll-card[data-index="3"] { --tilt:  9deg; }
-    .skill-scroll-card[data-index="4"] { --tilt: -6deg; }
+    .skill-scroll-card[data-index="1"] { --tilt: 8deg; }
+    .skill-scroll-card[data-index="2"] { --tilt: -6deg; }
+    .skill-scroll-card[data-index="3"] { --tilt: 9deg; }
+    .skill-scroll-card[data-index="4"] { --tilt: -7deg; }
 
-    /* Card number badge — top right like withhoney [01] */
-    .ssc-badge {
-      position: absolute;
-      top: 18px; right: 18px;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.72rem;
-      color: #ff3b3b;
-      letter-spacing: 1px;
-    }
-
-    .ssc-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 18px;
+    .ssc-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: rgba(255,59,59,0.15);
+      line-height: 1;
+      flex-shrink: 0;
+      font-family: 'Poppins', sans-serif;
     }
     .ssc-icon {
       font-size: 2rem;
       flex-shrink: 0;
-    }
-    .ssc-content h3 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0;
+      margin-top: 4px;
     }
     .ssc-content { flex: 1; }
-    .ssc-divider {
-      height: 1px;
-      background: rgba(255,59,59,0.15);
-      margin-bottom: 16px;
+    .ssc-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
     }
     .ssc-content p {
-      font-size: 0.82rem;
-      color: rgba(200,170,170,0.75);
-      line-height: 1.75;
-      margin-bottom: 18px;
-      font-family: 'Fira Code', monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
     }
     .ssc-bar {
-      height: 3px;
-      background: rgba(255,255,255,0.07);
+      height: 4px;
+      background: rgba(255,255,255,0.08);
       border-radius: 2px;
       overflow: hidden;
       margin-bottom: 6px;
@@ -725,11 +685,64 @@
       border-radius: 2px;
     }
     .ssc-pct {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       color: #ff3b3b;
       font-weight: 600;
-      font-family: 'Fira Code', monospace;
     }
+
+    /* ── SKILLS SCROLL ANIMATION (withhoney style) ── */
+    .skills-scroll-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 20px 0 60px;
+    }
+    .skill-scroll-card {
+      width: min(480px, 88vw);
+      background: rgba(255,59,59,0.04);
+      border: 1px solid rgba(255,59,59,0.15);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      /* Start: tilted and below */
+      opacity: 0;
+      transform: rotate(6deg) translateY(80px) scale(0.92);
+      transition: 
+        opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+        transform 0.7s cubic-bezier(0.22,1,0.36,1);
+      will-change: transform, opacity;
+    }
+    /* Even cards tilt opposite direction */
+    .skill-scroll-card[data-index="1"],
+    .skill-scroll-card[data-index="3"],
+    .skill-scroll-card[data-index="5"] {
+      transform: rotate(-6deg) translateY(80px) scale(0.92);
+      align-self: flex-end;
+      margin-right: max(0px, calc((100% - 480px) / 2));
+    }
+    .skill-scroll-card[data-index="0"],
+    .skill-scroll-card[data-index="2"],
+    .skill-scroll-card[data-index="4"] {
+      align-self: flex-start;
+      margin-left: max(0px, calc((100% - 480px) / 2));
+    }
+    /* Active = straight, visible */
+    .skill-scroll-card.in-view {
+      opacity: 1;
+      transform: rotate(0deg) translateY(0) scale(1);
+    }
+    /* Exit upward */
+    .skill-scroll-card.exit-up {
+      opacity: 0;
+      transform: rotate(-2deg) translateY(-60px) scale(0.95);
+      transition: 
+        opacity 0.5s ease,
+        transform 0.5s ease;
+    }
+    .skill-scroll-card .skill-icon { font-size: 2rem; margin-bottom: 12px; }
+    .skill-scroll-card .skill-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .skill-scroll-card .skill-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -957,97 +970,48 @@
     <h2 class="section-title">My <span>Skills</span></h2>
     <div class="section-line"></div>
   </div>
-
   <div class="skills-scroll-container">
-    <div class="skill-sticky-wrapper">
-      <span class="skills-counter" id="skills-counter">[ 01 / 05 ]</span>
-      <span class="skills-label">MY SKILLS</span>
-
-      <!-- CARD 1: HTML5 -->
-      <div class="skill-scroll-card" data-index="0">
-        <span class="ssc-badge">[01]</span>
-        <div class="ssc-top">
-          <div class="ssc-icon">🌐</div>
-          <div class="ssc-content">
-            <h3>HTML5</h3>
-          </div>
-        </div>
-        <div class="ssc-divider"></div>
-        <div class="ssc-content">
-          <p>Semantic markup, accessibility best practices, modern web standards and clean structure.</p>
-          <div class="ssc-bar"><div class="ssc-fill" style="width:92%"></div></div>
-          <span class="ssc-pct">92%</span>
-        </div>
-      </div>
-
-      <!-- CARD 2: CSS3 -->
-      <div class="skill-scroll-card" data-index="1">
-        <span class="ssc-badge">[02]</span>
-        <div class="ssc-top">
-          <div class="ssc-icon">🎨</div>
-          <div class="ssc-content">
-            <h3>CSS3</h3>
-          </div>
-        </div>
-        <div class="ssc-divider"></div>
-        <div class="ssc-content">
-          <p>Flexbox, Grid, animations, responsive design, modern CSS effects and transitions.</p>
-          <div class="ssc-bar"><div class="ssc-fill" style="width:88%"></div></div>
-          <span class="ssc-pct">88%</span>
-        </div>
-      </div>
-
-      <!-- CARD 3: JavaScript -->
-      <div class="skill-scroll-card" data-index="2">
-        <span class="ssc-badge">[03]</span>
-        <div class="ssc-top">
-          <div class="ssc-icon">⚡</div>
-          <div class="ssc-content">
-            <h3>JavaScript</h3>
-          </div>
-        </div>
-        <div class="ssc-divider"></div>
-        <div class="ssc-content">
-          <p>ES6+, DOM manipulation, async programming, APIs and interactive experiences.</p>
-          <div class="ssc-bar"><div class="ssc-fill" style="width:85%"></div></div>
-          <span class="ssc-pct">85%</span>
-        </div>
-      </div>
-
-      <!-- CARD 4: Python -->
-      <div class="skill-scroll-card" data-index="3">
-        <span class="ssc-badge">[04]</span>
-        <div class="ssc-top">
-          <div class="ssc-icon">🐍</div>
-          <div class="ssc-content">
-            <h3>Python</h3>
-          </div>
-        </div>
-        <div class="ssc-divider"></div>
-        <div class="ssc-content">
-          <p>Scripting, automation, data processing and powerful web backends.</p>
-          <div class="ssc-bar"><div class="ssc-fill" style="width:82%"></div></div>
-          <span class="ssc-pct">82%</span>
-        </div>
-      </div>
-
-      <!-- CARD 5: Django -->
-      <div class="skill-scroll-card" data-index="4">
-        <span class="ssc-badge">[05]</span>
-        <div class="ssc-top">
-          <div class="ssc-icon">🦄</div>
-          <div class="ssc-content">
-            <h3>Django</h3>
-          </div>
-        </div>
-        <div class="ssc-divider"></div>
-        <div class="ssc-content">
-          <p>REST APIs, ORM, authentication systems and full-stack web applications.</p>
-          <div class="ssc-bar"><div class="ssc-fill" style="width:78%"></div></div>
-          <span class="ssc-pct">78%</span>
-        </div>
-      </div>
-
+    <div class="skill-scroll-card" data-index="0">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">HTML5</div>
+      <div class="skill-desc">Semantic markup, accessibility best practices, modern web standards.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:92%"></div></div>
+      <div class="skill-pct">92%</div>
+    </div>
+    <div class="skill-scroll-card" data-index="1">
+      <div class="skill-icon">🎨</div>
+      <div class="skill-name">CSS3</div>
+      <div class="skill-desc">Flexbox, Grid, animations, responsive design & modern CSS.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:88%"></div></div>
+      <div class="skill-pct">88%</div>
+    </div>
+    <div class="skill-scroll-card" data-index="2">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-desc">ES6+, DOM manipulation, async programming, APIs.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:85%"></div></div>
+      <div class="skill-pct">85%</div>
+    </div>
+    <div class="skill-scroll-card" data-index="3">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-desc">Scripting, automation, data processing, web backends.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:82%"></div></div>
+      <div class="skill-pct">82%</div>
+    </div>
+    <div class="skill-scroll-card" data-index="4">
+      <div class="skill-icon">🦄</div>
+      <div class="skill-name">Django</div>
+      <div class="skill-desc">REST APIs, ORM, auth systems, full-stack web apps.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:78%"></div></div>
+      <div class="skill-pct">78%</div>
+    </div>
+    <div class="skill-scroll-card" data-index="5">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">Databases</div>
+      <div class="skill-desc">SQL, PostgreSQL, SQLite, database design & queries.</div>
+      <div class="skill-level-bar"><div class="skill-fill" style="width:75%"></div></div>
+      <div class="skill-pct">75%</div>
     </div>
   </div>
 </section>
@@ -1302,61 +1266,54 @@
   // ── SKILLS SCROLL ANIMATION (withhoney style) ──
   (function() {
     const section = document.querySelector('#skills .skills-scroll-container');
+    const wrapper = document.querySelector('.skill-sticky-wrapper');
     const cards   = document.querySelectorAll('.skill-scroll-card');
-    const counter = document.getElementById('skills-counter');
     if (!section || !cards.length) return;
 
     const TOTAL = cards.length;
 
     function lerp(a, b, t) { return a + (b - a) * t; }
     function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-    function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
     function onScroll() {
-      const rect   = section.getBoundingClientRect();
-      const secH   = section.offsetHeight;
-      const viewH  = window.innerHeight;
+      const rect    = section.getBoundingClientRect();
+      const secH    = section.offsetHeight;
+      const viewH   = window.innerHeight;
+      // progress 0→1 through the tall section
       const rawProg = -rect.top / (secH - viewH);
       const prog    = clamp(rawProg, 0, 1);
 
-      // Update counter
-      const activeIdx = Math.min(Math.floor(prog * TOTAL), TOTAL - 1);
-      if (counter) counter.textContent = `[ 0${activeIdx + 1} / 0${TOTAL} ]`;
-
+      // Each card gets 1/TOTAL of the scroll range
       const slotSize = 1 / TOTAL;
 
       cards.forEach((card, i) => {
-        const tilt  = parseFloat(getComputedStyle(card).getPropertyValue('--tilt')) || (i % 2 === 0 ? -8 : 8);
+        const start  = i * slotSize;           // card starts entering
+        const mid    = start + slotSize * 0.4; // card fully upright & visible
+        const end    = start + slotSize;       // card exits upward
 
-        const start  = i * slotSize;
-        const mid    = start + slotSize * 0.35;   // card fully upright
-        const hold   = start + slotSize * 0.65;   // start fading out
-        const end    = start + slotSize;
+        const tilt   = parseFloat(card.style.getPropertyValue('--tilt') || card.dataset.index % 2 === 0 ? -8 : 8);
 
         if (prog < start) {
-          // waiting below
-          card.style.transform = `translateY(110vh) rotate(${tilt}deg)`;
+          // Below: waiting
+          card.style.transform = `translateY(120vh) rotate(${tilt}deg)`;
           card.style.opacity   = '0';
         } else if (prog < mid) {
-          // rising in: tilted → straight
-          const t   = easeInOut((prog - start) / (mid - start));
-          const ty  = lerp(110, 0, t);
+          // Rising in: tilted → straight
+          const t   = (prog - start) / (mid - start);
+          const ty  = lerp(80, 0, t);         // vh units mapped roughly
           const rot = lerp(tilt, 0, t);
+          const op  = lerp(0, 1, t);
           card.style.transform = `translateY(${ty}vh) rotate(${rot}deg)`;
-          card.style.opacity   = String(lerp(0, 1, Math.min(t * 2.5, 1)));
-        } else if (prog < hold) {
-          // centre: fully visible, stationary
-          card.style.transform = `translateY(0vh) rotate(0deg)`;
-          card.style.opacity   = '1';
+          card.style.opacity   = op;
         } else if (prog < end) {
-          // exiting upward: drift up & fade
-          const t  = easeInOut((prog - hold) / (end - hold));
-          const ty = lerp(0, -90, t);
+          // Centre: fully visible, slowly drifting up
+          const t  = (prog - mid) / (end - mid);
+          const ty = lerp(0, -30, t);
           card.style.transform = `translateY(${ty}vh) rotate(0deg)`;
-          card.style.opacity   = String(lerp(1, 0, t));
+          card.style.opacity   = lerp(1, 0, Math.max(0, t - 0.6) / 0.4);
         } else {
-          // gone above
-          card.style.transform = `translateY(-110vh) rotate(0deg)`;
+          // Gone: above
+          card.style.transform = `translateY(-120vh) rotate(0deg)`;
           card.style.opacity   = '0';
         }
       });
@@ -1365,6 +1322,41 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   })();
+
+
+  // ── SKILLS WITHHONEY SCROLL ANIMATION ──
+  const skillCards = document.querySelectorAll('.skill-scroll-card');
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const card = entry.target;
+      if (entry.isIntersecting) {
+        // Card entering viewport - straighten it
+        card.classList.remove('exit-up');
+        card.classList.add('in-view');
+        // Trigger skill bar fill
+        card.querySelectorAll('.skill-fill').forEach(f => {
+          f.style.animation = 'fillBar 1.2s ease-out forwards';
+        });
+      } else {
+        // Check if card exited from top (scrolled past)
+        const rect = card.getBoundingClientRect();
+        if (rect.bottom < 0) {
+          // Exited upward
+          card.classList.remove('in-view');
+          card.classList.add('exit-up');
+        } else {
+          // Below viewport - reset to tilted entry state
+          card.classList.remove('in-view', 'exit-up');
+        }
+      }
+    });
+  }, { 
+    threshold: 0.25,
+    rootMargin: '0px 0px -80px 0px'
+  });
+
+  skillCards.forEach(card => skillObserver.observe(card));
 
 </script>
 </body>
